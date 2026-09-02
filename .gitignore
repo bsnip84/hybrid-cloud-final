@@ -1,5 +1,6 @@
-.terraform/
-terraform.tfstate
-terraform.tfstate.backup
-*.tfvars
-p2s-cert-base64.txt
+   .terraform/
+   terraform.tfstate
+   terraform.tfstate.backup
+   *.tfvars
+   p2s-cert-base64.txt
+   .terraform.lock.hcl
