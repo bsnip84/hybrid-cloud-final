@@ -1,0 +1,48 @@
+# ============================================
+# Sample Web App - Deployment
+# ============================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-webapp
+  labels:
+    app: sample-webapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sample-webapp
+  template:
+    metadata:
+      labels:
+        app: sample-webapp
+    spec:
+      containers:
+        - name: sample-webapp
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+
+---
+# ============================================
+# Sample Web App - Service (Load Balancer)
+# ============================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-webapp-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: sample-webapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
